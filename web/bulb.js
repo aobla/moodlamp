@@ -80,8 +80,8 @@ function updateColor() {
 
 function onConnected() {
 	document.querySelector('.connect-button').classList.add('hidden');
-	// document.querySelector('.connect-another').classList.remove('hidden');
-	// document.querySelector('.wheel').classList.remove('hidden');
+	document.querySelector('.connect-another').classList.remove('hidden');
+	document.querySelector('.wheel').classList.remove('hidden');
 	document.querySelector('.mic-button').classList.remove('hidden');
 	document.querySelector('.power-button').classList.remove('hidden');
 	turnedOn = false;
