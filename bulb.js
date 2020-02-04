@@ -24,7 +24,7 @@ let mouseIsDown = false;
 // });
 
 ColorPicker = iro.ColorPicker("#color-picker", {
-	width: 320,
+	width: 300,
 	padding: 4,
 	sliderMargin: 24,
 	handleRadius: 8,
@@ -79,10 +79,10 @@ function updateColor() {
 }
 
 function onConnected() {
-	document.querySelector('.connect-button').classList.add('hidden');
-	document.querySelector('.connect-another').classList.remove('hidden');
-	document.querySelector('.wheel').classList.remove('hidden');
-	document.querySelector('.mic-button').classList.remove('hidden');
+	// document.querySelector('.connect-button').classList.add('hidden');
+	// document.querySelector('.connect-another').classList.remove('hidden');
+	// document.querySelector('.wheel').classList.remove('hidden');
+	// document.querySelector('.mic-button').classList.remove('hidden');
 	document.querySelector('.power-button').classList.remove('hidden');
 	turnedOn = false;
 }
@@ -153,7 +153,7 @@ function toggleButtons() {
 	Array.from(document.querySelectorAll('.color-buttons button')).forEach(function (colorButton) {
 		colorButton.disabled = !turnedOn;
 	});
-	document.querySelector('.mic-button button').disabled = !turnedOn;
+	// document.querySelector('.mic-button button').disabled = !turnedOn;
     turnedOn ? document.querySelector('.wheel').classList.remove('hidden') : document.querySelector('.wheel').classList.add('hidden');
 }
 
@@ -178,11 +178,11 @@ function blue() {
 		.then(() => console.log('Color set to Blue'));
 }
 
-function listen() {
-	annyang.start({
-		continuous: true
-	});
-}
+// function listen() {
+// 	annyang.start({
+// 		continuous: true
+// 	});
+// }
 
 // Voice commands
 // annyang.addCommands({
@@ -193,7 +193,7 @@ function listen() {
 // 	'turn off': turnOff
 // });
 
-// Install service worker - for offline support
-// if ('serviceWorker' in navigator) {
-// 	navigator.serviceWorker.register('serviceworker.js');
-// }
+//Install service worker - for offline support
+if ('serviceWorker' in navigator) {
+	navigator.serviceWorker.register('serviceworker.js');
+}
