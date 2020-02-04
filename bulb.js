@@ -2,31 +2,16 @@
 
 let ledCharacteristic = [];
 let turnedOn = false;
-let ColorPicker = null;
-let oldColor = null;
-let mouseIsDown = false;
+let ColorWheel = null;
+let WhiteSlider = null;
+// let oldColor = null;
+// let mouseIsDown = false;
 
-// ColorPicker = iro.ColorPicker("#color-wheel", {
-// 	width: 320,
-// 	height: 320,
-// 	padding: 4,
-// 	sliderMargin: 24,
-// 	markerRadius: 8,
-// 	color: "rgb(255, 255, 255)",
-// 	styles: {
-// 		".on-off": {
-// 			"background-color": "rgb"
-// 		},
-// 		".on-off:hover": {
-// 			"background-color": "rgb"
-// 		}
-// 	}
-// });
 
-ColorPicker = iro.ColorPicker("#color-picker", {
-	width: 300,
+ColorWheel = iro.ColorPicker("#color-picker", {
+	width: 280,
 	padding: 4,
-	sliderMargin: 24,
+	sliderMargin: 36,
 	handleRadius: 8,
 	color: "rgb(255, 255, 255)",
 	// styles: {
@@ -39,44 +24,68 @@ ColorPicker = iro.ColorPicker("#color-picker", {
 	// }
 });
 
-document.querySelector('.wheel').addEventListener('mousedown', function (e) {
-	handleMouseDown(e);
-}, false);
-document.querySelector('.wheel').addEventListener('mousemove', function (e) {
-	handleMouseMove(e);
-}, false);
-document.querySelector('.wheel').addEventListener('mouseup', function (e) {
-	handleMouseUp(e);
-}, false);
+WhiteSlider = iro.ColorPicker("#white-slider", {
+	width: 280,
+	padding: 4,
+	sliderMargin: 36,
+	handleRadius: 8,
+	layout: [
+		{
+		  component: iro.ui.Slider,
+		  options: {}
+		}
+	]
+});
 
-function handleMouseDown(e) {
 
-	// mousedown stuff here
-	mouseIsDown = true;
-}
 
-function handleMouseUp(e) {
-	updateColor();
 
-	// mouseup stuff here
-	mouseIsDown = false;
-}
 
-function handleMouseMove(e) {
-	if (!mouseIsDown) {
-		return;
-	}
 
-	updateColor();
-}
 
-function updateColor() {
-	if (oldColor != null && oldColor != "" && oldColor != ColorPicker.color.rgbString) {
-		setColor(ColorPicker.color.rgb.r, ColorPicker.color.rgb.g, ColorPicker.color.rgb.b);
-	}
 
-	oldColor = ColorPicker.color.rgbString;
-}
+// document.querySelector('.wheel').addEventListener('mousedown', function (e) {
+// 	handleMouseDown(e);
+// }, false);
+// document.querySelector('.wheel').addEventListener('mousemove', function (e) {
+// 	handleMouseMove(e);
+// }, false);
+// document.querySelector('.wheel').addEventListener('mouseup', function (e) {
+// 	handleMouseUp(e);
+// }, false);
+
+
+// function handleMouseDown(e) {
+
+// 	// mousedown stuff here
+// 	mouseIsDown = true;
+// }
+
+// function handleMouseUp(e) {
+// 	updateColor();
+
+// 	// mouseup stuff here
+// 	mouseIsDown = false;
+// }
+
+// function handleMouseMove(e) {
+// 	if (!mouseIsDown) {
+// 		return;
+// 	}
+
+// 	updateColor();
+// }
+
+// function updateColor() {
+// 	if (oldColor != null && oldColor != "" && oldColor != ColorWheel.color.rgbString) {
+// 		setColor(ColorWheel.color.rgb.r, ColorWheel.color.rgb.g, ColorWheel.color.rgb.b);
+// 	}
+// 	oldColor = ColorWheel.color.rgbString;
+// }
+
+
+
+
 
 function onConnected() {
 	// document.querySelector('.connect-button').classList.add('hidden');
@@ -85,6 +94,8 @@ function onConnected() {
 	// document.querySelector('.mic-button').classList.remove('hidden');
 	document.querySelector('.power-button').classList.remove('hidden');
 	turnedOn = false;
+	ColorWheel.off('color:change', onColorUpdate); // listen to a color picker's color:change event
+	WhiteSlider.off('color:change', onWhiteUpdate); // listen to a white slide:change event
 }
 
 function connect() {
@@ -127,8 +138,11 @@ function turnOn() {
 		.catch(err => console.log('Error when turning on! ', err))
 		.then(() => {
 			turnedOn = true;
-			toggleButtons();
+			// toggleButtons();
+			ColorWheel.on('color:change', onColorUpdate); // listen to a color picker's color:change event
+			WhiteSlider.on('color:change', onWhiteUpdate); // listen to a white slide:change event
 		}));
+
 }
 
 function turnOff() {
@@ -137,8 +151,11 @@ function turnOff() {
 		.catch(err => console.log('Error when turning off! ', err))
 		.then(() => {
 			turnedOn = false;
-			toggleButtons();
+			// toggleButtons();
+			ColorWheel.off('color:change', onColorUpdate); // listen to a color picker's color:change event
+			WhiteSlider.off('color:change', onWhiteUpdate); // listen to a white slide:change event
 		}));
+
 }
 
 function turnOnOff() {
@@ -149,12 +166,24 @@ function turnOnOff() {
 	}
 }
 
-function toggleButtons() {
-	Array.from(document.querySelectorAll('.color-buttons button')).forEach(function (colorButton) {
-		colorButton.disabled = !turnedOn;
-	});
-	// document.querySelector('.mic-button button').disabled = !turnedOn;
-    turnedOn ? document.querySelector('.wheel').classList.remove('hidden') : document.querySelector('.wheel').classList.add('hidden');
+// function toggleButtons() {
+// 	// Array.from(document.querySelectorAll('.color-buttons button')).forEach(function (colorButton) {
+// 	// 	colorButton.disabled = !turnedOn;
+// 	// });
+// 	// document.querySelector('.mic-button button').disabled = !turnedOn;
+//     turnedOn ? document.querySelector('.wheel').classList.remove('hidden') : document.querySelector('.wheel').classList.add('hidden');
+// }
+
+function onColorUpdate(color, changes) {
+  // send the color's new value
+  setColor(color.rgb.r, color.rgb.g, color.rgb.b);
+  //console.log(color.rgbString);
+}
+
+function onWhiteUpdate(color, changes) {
+  // send the color's new value
+  setWhiteColor(color.rgb.r); // rgb changed together, get someone (r)
+  //console.log(color.rgbString);
 }
 
 function setColor(red, green, blue) {
@@ -163,20 +192,26 @@ function setColor(red, green, blue) {
 		.catch(err => console.log('Error when writing value! ', err)));
 }
 
-function red() {
-	return setColor(255, 0, 0)
-		.then(() => console.log('Color set to Red'));
+function setWhiteColor(white) {
+	let data = new Uint8Array([0x56, 0x00, 0x00, 0x00, white, 0x0f, 0xaa]);
+	return ledCharacteristic.forEach(led => led.writeValue(data)
+		.catch(err => console.log('Error when writing value! ', err)));
 }
 
-function green() {
-	return setColor(0, 255, 0)
-		.then(() => console.log('Color set to Green'));
-}
+// function red() {
+// 	return setColor(255, 0, 0)
+// 		.then(() => console.log('Color set to Red'));
+// }
 
-function blue() {
-	return setColor(0, 0, 255)
-		.then(() => console.log('Color set to Blue'));
-}
+// function green() {
+// 	return setColor(0, 255, 0)
+// 		.then(() => console.log('Color set to Green'));
+// }
+
+// function blue() {
+// 	return setColor(0, 0, 255)
+// 		.then(() => console.log('Color set to Blue'));
+// }
 
 // function listen() {
 // 	annyang.start({
