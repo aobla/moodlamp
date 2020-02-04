@@ -2,25 +2,41 @@
 
 let ledCharacteristic = [];
 let turnedOn = false;
-let colorWheel = null;
+let ColorPicker = null;
 let oldColor = null;
 let mouseIsDown = false;
 
-colorWheel = iro.ColorWheel("#color-wheel", {
+// ColorPicker = iro.ColorPicker("#color-wheel", {
+// 	width: 320,
+// 	height: 320,
+// 	padding: 4,
+// 	sliderMargin: 24,
+// 	markerRadius: 8,
+// 	color: "rgb(255, 255, 255)",
+// 	styles: {
+// 		".on-off": {
+// 			"background-color": "rgb"
+// 		},
+// 		".on-off:hover": {
+// 			"background-color": "rgb"
+// 		}
+// 	}
+// });
+
+ColorPicker = iro.ColorPicker("#color-picker", {
 	width: 320,
-	height: 320,
 	padding: 4,
 	sliderMargin: 24,
-	markerRadius: 8,
+	handleRadius: 8,
 	color: "rgb(255, 255, 255)",
-	styles: {
-		".on-off": {
-			"background-color": "rgb"
-		},
-		".on-off:hover": {
-			"background-color": "rgb"
-		}
-	}
+	// styles: {
+	// 	".on-off": {
+	// 		"background-color": "rgb"
+	// 	},
+	// 	".on-off:hover": {
+	// 		"background-color": "rgb"
+	// 	}
+	// }
 });
 
 document.querySelector('.wheel').addEventListener('mousedown', function (e) {
@@ -55,11 +71,11 @@ function handleMouseMove(e) {
 }
 
 function updateColor() {
-	if (oldColor != null && oldColor != "" && oldColor != colorWheel.color.rgbString) {
-		setColor(colorWheel.color.rgb.r, colorWheel.color.rgb.g, colorWheel.color.rgb.b);
+	if (oldColor != null && oldColor != "" && oldColor != ColorPicker.color.rgbString) {
+		setColor(ColorPicker.color.rgb.r, ColorPicker.color.rgb.g, ColorPicker.color.rgb.b);
 	}
 
-	oldColor = colorWheel.color.rgbString;
+	oldColor = ColorPicker.color.rgbString;
 }
 
 function onConnected() {
