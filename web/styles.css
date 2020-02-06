@@ -51,13 +51,8 @@ i.material-icons {
     flex-direction: row;
     /*flex-grow: 0;*/
 
-<<<<<<< HEAD
     padding-top: 10px;
     padding-bottom: 10px;
-=======
-    padding-top: 20px;
-    padding-bottom: 20px;
->>>>>>> 9373e6bafbc8615b197a38b0525bf49cf3cb182c
     /*width: 300px;*/
 }
 
@@ -77,18 +72,6 @@ i.material-icons {
     /*top: 15px;*/
     /*width: 100px;*/
 }
-<<<<<<< HEAD
-=======
-.title-title {
-    /*margin-left: 10px;*/
-    /*margin: 0 auto;*/
-    /*align-self: center;*/
-    /*padding: 10px;*/
-    /*justify-content: space-between;*/
-    /*top: 15px;*/
-    /*width: 100px;*/
-}
->>>>>>> 9373e6bafbc8615b197a38b0525bf49cf3cb182c
 .connect-another {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
@@ -113,10 +96,7 @@ i.material-icons {
     /*width: 100px;*/
     /*align-content: center;*/
     margin: 0 auto;
-<<<<<<< HEAD
     padding-bottom: 10px;
-=======
->>>>>>> 9373e6bafbc8615b197a38b0525bf49cf3cb182c
 }
 
 #on-off {
@@ -124,14 +104,8 @@ i.material-icons {
 }
 #title {
     font-family: 'Fredoka One';
-<<<<<<< HEAD
     font-size: 26px;
     color: #4d4d4d;
-=======
-    font-size: 22px;
-    color: #333333;
-
->>>>>>> 9373e6bafbc8615b197a38b0525bf49cf3cb182c
 /*    margin: auto;
     align-self: center;*/
     /*align-content: center;*/

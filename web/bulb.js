@@ -111,11 +111,7 @@ function onConnected() {
 	// document.querySelector('.mic-button').classList.remove('hidden');
 	//document.querySelector('.power-button').classList.remove('hidden');
 	document.getElementById('power-button').classList.remove('hidden');
-<<<<<<< HEAD
 	document.getElementById('power-button').style.backgroundColor = pwrButtonColorOn;
-=======
-	document.getElementById('power-button').style.backgroundColor = "#ffcc00";
->>>>>>> 9373e6bafbc8615b197a38b0525bf49cf3cb182c
 	turnedOn = true;
 	document.querySelector('.on-off-icon').style.color = "white";
 	ColorWheel.off('color:change', onColorUpdate); // listen to a color picker's color:change event
@@ -158,11 +154,7 @@ function connect() {
 
 function turnOn() {
 	// console.log('turnOn');
-<<<<<<< HEAD
 	// document.getElementById('power-button').style.backgroundColor = pwrButtonColorOn;
-=======
-	// document.getElementById('power-button').style.backgroundColor = "#ffcc00";
->>>>>>> 9373e6bafbc8615b197a38b0525bf49cf3cb182c
 	// document.querySelector('.on-off-icon').style.color = "white";
 	// turnedOn = true;
 	let data = new Uint8Array([0xcc, 0x23, 0x33]);
@@ -171,7 +163,7 @@ function turnOn() {
 		.then(() => {
 			turnedOn = true;
 			// toggleButtons();
-			
+			ColorWheel.on('color:change', onColorUpdate); // listen to a color picker's color:change event
 			WhiteSlider.on('color:change', onWhiteUpdate); // listen to a white slide:change event
 			document.getElementById('power-button').style.backgroundColor = pwrButtonColorOn;
 			document.querySelector('.on-off-icon').style.color = "white";			
