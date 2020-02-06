@@ -160,8 +160,8 @@ function turnOn() {
 	// document.getElementById('power-button').style.backgroundColor = pwrButtonColorOn;
 	// document.querySelector('.on-off-icon').style.color = "white";
 	// turnedOn = true;
-	// let data = new Uint8Array([0xcc, 0x23, 0x33]);
-	let data = new Uint8Array([0x00]);
+	let data = new Uint8Array([0xcc, 0x23, 0x33]);
+	// let data = new Uint8Array([0x00]);
 	return ledCharacteristic.forEach(led => led.writeValue(data)
 		.catch(err => console.log('Error when turning on! ', err))
 		.then(() => {
@@ -180,8 +180,8 @@ function turnOff() {
 	// document.getElementById('power-button').style.backgroundColor = "#a6a6a6";
 	// document.querySelector('.on-off-icon').style.color = "black";
 	// console.log('turnOff');
-	// let data = new Uint8Array([0xcc, 0x24, 0x33]);
-	let data = new Uint8Array([0x01]);
+	let data = new Uint8Array([0xcc, 0x24, 0x33]);
+	// let data = new Uint8Array([0x01]);
 	return ledCharacteristic.forEach(led => led.writeValue(data)
 		.catch(err => console.log('Error when turning off! ', err))
 		.then(() => {
