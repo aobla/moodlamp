@@ -39,11 +39,21 @@ i.material-icons {
 }
 
 .hidden {
-    display: none;
+    /*display: none;*/
+    visibility: hidden;
 }
 
 .title-and-connect {
     display: inherit;
+    justify-content: space-between;
+    align-items: flex-start;
+/*    flex-wrap: wrap;*/
+    flex-direction: row;
+    /*flex-grow: 0;*/
+
+    padding-top: 20px;
+    padding-bottom: 20px;
+    /*width: 300px;*/
 }
 
 .connect-another-icon {
@@ -53,11 +63,57 @@ i.material-icons {
     position: relative !important;
     float: right !important;
 }
-
+.title-title {
+    /*margin-left: 10px;*/
+    /*margin: 0 auto;*/
+    /*align-self: center;*/
+    /*padding: 10px;*/
+    /*justify-content: space-between;*/
+    /*top: 15px;*/
+    /*width: 100px;*/
+}
 .connect-another {
-    margin-left: 10px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    /*margin-left: 10px;*/
+    /*margin: auto;*/
+    /*justify-content: space-between;*/
+    /*width: 100px;*/
+}
+
+.wheel {
+    /*margin-left: 10px;*/
+    /*margin: auto;*/
+    /*justify-content: space-between;*/
+    /*width: 100px;*/
+    /*align-content: center;*/
+    margin: 0 auto;
+}
+.slider {
+    /*margin-left: 10px;*/
+    /*margin: auto;*/
+    /*justify-content: space-between;*/
+    /*width: 100px;*/
+    /*align-content: center;*/
+    margin: 0 auto;
 }
 
 #on-off {
     background-color: #fff;
+}
+#title {
+    font-family: 'Fredoka One';
+    font-size: 22px;
+    color: #333333;
+
+/*    margin: auto;
+    align-self: center;*/
+    /*align-content: center;*/
+}
+
+#values {
+    font-family: 'Fredoka One';
+    line-height: 150%;
+    margin: 0 auto;
+    color : #6d6d6d; 
 }
