@@ -85,6 +85,18 @@ WhiteSlider = iro.ColorPicker("#white-slider", {
 
 
 
+var values = document.getElementById("values");
+
+// https://iro.js.org/guide.html#color-picker-events
+ColorWheel.on(["color:init", "color:change"], function(color){
+  // Show the current color in different formats
+  // Using the selected color: https://iro.js.org/guide.html#selected-color-api
+  values.innerHTML = [
+    "hex: " + color.hexString,
+    "rgb: " + color.rgbString,
+    "hsl: " + color.hslString,
+  ].join("<br>");
+});
 
 
 function onConnected() {
@@ -92,8 +104,11 @@ function onConnected() {
 	// document.querySelector('.connect-another').classList.remove('hidden');
 	// document.querySelector('.wheel').classList.remove('hidden');
 	// document.querySelector('.mic-button').classList.remove('hidden');
-	document.querySelector('.power-button').classList.remove('hidden');
-	turnedOn = false;
+	//document.querySelector('.power-button').classList.remove('hidden');
+	document.getElementById('power-button').classList.remove('hidden');
+	document.getElementById('power-button').style.backgroundColor = "#ffcc00";
+	turnedOn = true;
+	document.querySelector('.on-off-icon').style.color = "white";
 	ColorWheel.off('color:change', onColorUpdate); // listen to a color picker's color:change event
 	WhiteSlider.off('color:change', onWhiteUpdate); // listen to a white slide:change event
 }
@@ -133,19 +148,27 @@ function connect() {
 }
 
 function turnOn() {
+	// console.log('turnOn');
+	// document.getElementById('power-button').style.backgroundColor = "#ffcc00";
+	// document.querySelector('.on-off-icon').style.color = "white";
+	// turnedOn = true;
 	let data = new Uint8Array([0xcc, 0x23, 0x33]);
 	return ledCharacteristic.forEach(led => led.writeValue(data)
 		.catch(err => console.log('Error when turning on! ', err))
 		.then(() => {
 			turnedOn = true;
 			// toggleButtons();
-			ColorWheel.on('color:change', onColorUpdate); // listen to a color picker's color:change event
+			
 			WhiteSlider.on('color:change', onWhiteUpdate); // listen to a white slide:change event
 		}));
 
 }
 
 function turnOff() {
+	// turnedOn = false;
+	// document.getElementById('power-button').style.backgroundColor = "#a6a6a6";
+	// document.querySelector('.on-off-icon').style.color = "black";
+	// console.log('turnOff');
 	let data = new Uint8Array([0xcc, 0x24, 0x33]);
 	return ledCharacteristic.forEach(led => led.writeValue(data)
 		.catch(err => console.log('Error when turning off! ', err))
@@ -174,10 +197,11 @@ function turnOnOff() {
 //     turnedOn ? document.querySelector('.wheel').classList.remove('hidden') : document.querySelector('.wheel').classList.add('hidden');
 // }
 
+
 function onColorUpdate(color, changes) {
   // send the color's new value
   setColor(color.rgb.r, color.rgb.g, color.rgb.b);
-  //console.log(color.rgbString);
+  // console.log(color.rgbString);
 }
 
 function onWhiteUpdate(color, changes) {
