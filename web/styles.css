@@ -7,7 +7,7 @@ body {
     align-items: center;
     margin: 0 auto;
     justify-content: center;
-    background: #fff;
+    background: #e6f2ff;
     max-width: 450px;
 }
 
@@ -51,17 +51,17 @@ i.material-icons {
     flex-direction: row;
     /*flex-grow: 0;*/
 
-    padding-top: 20px;
-    padding-bottom: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
     /*width: 300px;*/
 }
 
 .connect-another-icon {
-    top: 17px !important;
+/*    top: 17px !important;
     left: 4px !important;
     margin-left: -10px !important;
     position: relative !important;
-    float: right !important;
+    float: right !important;*/
 }
 .title-title {
     /*margin-left: 10px;*/
@@ -96,6 +96,7 @@ i.material-icons {
     /*width: 100px;*/
     /*align-content: center;*/
     margin: 0 auto;
+    padding-bottom: 10px;
 }
 
 #on-off {
@@ -103,9 +104,8 @@ i.material-icons {
 }
 #title {
     font-family: 'Fredoka One';
-    font-size: 22px;
-    color: #333333;
-
+    font-size: 26px;
+    color: #4d4d4d;
 /*    margin: auto;
     align-self: center;*/
     /*align-content: center;*/

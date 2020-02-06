@@ -7,13 +7,17 @@ let WhiteSlider = null;
 // let oldColor = null;
 // let mouseIsDown = false;
 
+let pwrButtonColorOn = "#ffcc66";
+let pwrButtonColorOff = "#a6a6a6";
+
 
 ColorWheel = iro.ColorPicker("#color-picker", {
 	width: 280,
-	padding: 4,
-	sliderMargin: 36,
+	padding: 2,
+	sliderMargin: 30,
 	handleRadius: 8,
 	color: "rgb(255, 255, 255)",
+	borderWidth: 0,
 	// styles: {
 	// 	".on-off": {
 	// 		"background-color": "rgb"
@@ -26,9 +30,10 @@ ColorWheel = iro.ColorPicker("#color-picker", {
 
 WhiteSlider = iro.ColorPicker("#white-slider", {
 	width: 280,
-	padding: 4,
-	sliderMargin: 36,
+	padding: 2,
+	sliderMargin: 30,
 	handleRadius: 8,
+	borderWidth: 0,
 	layout: [
 		{
 		  component: iro.ui.Slider,
@@ -106,7 +111,7 @@ function onConnected() {
 	// document.querySelector('.mic-button').classList.remove('hidden');
 	//document.querySelector('.power-button').classList.remove('hidden');
 	document.getElementById('power-button').classList.remove('hidden');
-	document.getElementById('power-button').style.backgroundColor = "#ffcc00";
+	document.getElementById('power-button').style.backgroundColor = pwrButtonColorOn;
 	turnedOn = true;
 	document.querySelector('.on-off-icon').style.color = "white";
 	ColorWheel.off('color:change', onColorUpdate); // listen to a color picker's color:change event
@@ -149,7 +154,7 @@ function connect() {
 
 function turnOn() {
 	// console.log('turnOn');
-	// document.getElementById('power-button').style.backgroundColor = "#ffcc00";
+	// document.getElementById('power-button').style.backgroundColor = pwrButtonColorOn;
 	// document.querySelector('.on-off-icon').style.color = "white";
 	// turnedOn = true;
 	let data = new Uint8Array([0xcc, 0x23, 0x33]);
@@ -158,8 +163,10 @@ function turnOn() {
 		.then(() => {
 			turnedOn = true;
 			// toggleButtons();
-			
+			ColorWheel.on('color:change', onColorUpdate); // listen to a color picker's color:change event
 			WhiteSlider.on('color:change', onWhiteUpdate); // listen to a white slide:change event
+			document.getElementById('power-button').style.backgroundColor = pwrButtonColorOn;
+			document.querySelector('.on-off-icon').style.color = "white";			
 		}));
 
 }
@@ -177,6 +184,8 @@ function turnOff() {
 			// toggleButtons();
 			ColorWheel.off('color:change', onColorUpdate); // listen to a color picker's color:change event
 			WhiteSlider.off('color:change', onWhiteUpdate); // listen to a white slide:change event
+			document.getElementById('power-button').style.backgroundColor = pwrButtonColorOff;
+			document.querySelector('.on-off-icon').style.color = "black";
 		}));
 
 }
